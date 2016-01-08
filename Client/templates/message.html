@@ -1,0 +1,52 @@
+<!doctype html>
+<head><title>Light It TEST</title></head>
+<body>
+<br>
+<table id = "rezz" border = "1px">
+<tr bgcolor="#ddd">
+<td>
+	level
+</td>
+<td>
+	source_ip  
+</td>
+<td>
+	title
+</td>
+<td>
+	data
+</td>
+<td>
+	tags
+</td>
+<td>
+	date
+</td>
+</tr>
+	{% for tt in table_context %}
+	<tr>
+		<td>
+			{{tt[1]}}
+		</td>
+		<td>
+			{{tt[2]}}
+		</td>
+		<td>
+			{{tt[3]}}
+		</td>
+		<td>
+			{{tt[4]}}
+		</td>
+		<td>
+			{{tt[5]}}
+		</td>
+		<td>
+			{{tt[6]}}
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+<br>
+<br>
+</body>
+</html>

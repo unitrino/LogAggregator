@@ -1,0 +1,130 @@
+<!doctype html>
+<head>
+<style>
+   .layer1 {
+    float: left; /* Обтекание по правому краю */
+   }
+  .layer2 {
+   	width: 800px; /* Ширина элемента в пикселах */
+    margin: auto; /* Выравниваем по центру */
+   }
+  </style>
+<title>Light It TEST</title></head>
+<body>
+<br>
+<div class="layer2">
+	<div style="width: 400px; margin: 0px auto;">
+		<div class = "layer1">
+		<form action="/get_chains_info" method = "get">
+			<input name="id_channel" type = "hidden" value = "{{channel_id}}"> 
+			<input type="submit" name = "by_data" value = "BY DATE">
+		</form>
+		</div>
+		<div class = "layer1">
+		<form action="/get_chains_info" method = "get">
+			<input name="id_channel" type = "hidden" value = "{{channel_id}}"> 
+			<input type="submit" name = "by_number" value = "BY NUMBER">
+		</form>
+		</div>
+		<div class = "layer1">
+		<form action="/get_chains_info" method = "get">
+			<input name="id_channel" type = "hidden" value = "{{channel_id}}"> 
+			<input type="submit" name = "refresh" value = "REFRESH">
+		</form>
+		</div>
+		<div class = "layer1">
+		<button onclick="location.href = '../tables';" id="myButton">RETURN </button>
+		</div>
+<br>
+<br>
+<br>
+<div style="width: 100px; margin: 0px auto;">
+<b>
+LEVELS
+</b>
+</div>
+<div style="width: 550px; margin: 0px auto;">
+<form method="get" action="/get_chains_info">
+<input name="id_channel" type = "hidden" value = "{{channel_id}}"> 
+<br>
+	<span>
+	{% for elems in stat_levels %}
+		{{elems[0]}} - {{elems[1]}} <input type="radio" name="levels" value="{{elems[0]}}" {% if elems[2] %} checked="checked" 
+		{% endif%}
+		{% if not elems[1] %}
+		disabled
+		{% endif%}
+		onclick="javascript: submit()" 
+		>
+	</span>
+	{% endfor %}
+<br>
+</form>
+</div>
+<b>
+TAGS
+</b>
+<form method="get" action="/get_chains_info">
+<input name="id_channel" type = "hidden" value = "{{channel_id}}"> 
+<br>
+	{% for elems in stat_tags %}
+		{{elems[0]}} - {{elems[1]}}  <input type="radio" onclick="javascript: submit()" name="tags" value="{{elems[0]}}"
+		{% if elems[2] %} checked="checked" 
+		{% endif%}
+		{% if not elems[1] %}
+		disabled
+		{% endif%}
+		onclick="javascript: submit()"
+		>
+	<br>
+	{% endfor %}
+<br>
+</form>
+<table id = "rezz" border = "1px">
+<tr bgcolor="#ddd">
+<td>
+	title
+</td>
+<td>
+	level
+</td>
+<td>
+	last apears
+</td>
+<td>
+	num messages
+</td>
+<td>
+	tags
+</td>
+</tr>
+	{% for tt in table_context %}
+	<tr>
+		<td>
+			{{tt[0]}}
+		</td>
+		<td>
+			{{tt[1]}}
+		</td>
+		<td>
+			{{tt[2]}}
+		</td>
+		<td>
+			{{tt[3]}}
+		</td>
+		<td>
+			{{tt[4]}}
+		</td>
+		<td>
+		<form action="/details" method = "get">
+			<input name="details_chain" type = "hidden" value = "{{tt[5]}}"> 
+			<input type="submit" name = "info_about_channel" value = "DETAILS"></p>
+		</form>
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+<br>
+<br>
+</body>
+</html>

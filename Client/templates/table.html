@@ -1,0 +1,60 @@
+<!doctype html>
+<head><title>Testing send data to scala - akka</title></head>
+<body>
+<br>
+<form action="/tables" method = "post">
+	<input name="new_channel" type="submit" value = "add_new_channel">
+</form>
+
+<table id = "rezz" border = "1px">
+<tr bgcolor="#ddd">
+<td>
+	id
+</td>
+<td>
+	URL
+</td>
+<td>
+	err
+</td>
+<td>
+	criticals
+</td>
+<td>
+	total logs
+</td>
+</tr>
+	{% for tt in table_context %}
+	<tr>
+		<td>
+			{{tt[0]}}
+		</td>
+		<td>
+			{{tt[1]}}
+		</td>
+		<td>
+			{{tt[2]}}
+		</td>
+		<td>
+			{{tt[3]}}
+		</td>
+		<td>
+			{{tt[4]}}
+		</td>
+		<td>
+		<form action="/tables" method = "post">
+			<input name="id_channel" type = "hidden" value = "{{tt[0]}}"> 
+			<input type="submit" name = "delete_channel" value = "DEL"></p>
+		</form>
+		<form action="/get_chains_info" method = "get">
+			<input name="id_channel" type = "hidden" value = "{{tt[0]}}"> 
+			<input type="submit" name = "info_about_channel" value = "INFO"></p>
+		</form>
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+<br>
+<br>
+</body>
+</html>
